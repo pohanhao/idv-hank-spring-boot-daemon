@@ -9,7 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class Application {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(Application.class, args);
+		String mode = (args == null || args.length == 0) ? null : args[0];
+		if ("start".equals(mode)) {
+			SpringApplication.run(Application.class, args);
+		} else if ("stop".equals(mode)) {
+			System.exit(0);
+		} else {
+			String message = "Error control signal input.";
+			throw new RuntimeException(message);
+		}
 	}
 
 	@RestController
